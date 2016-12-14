@@ -24,7 +24,7 @@ void setup(){
 
   mcp_begin(MCP_ADDRESS);
   
-  // We mirror INTA and INTB, so that only one line is required between MCP and Arduino for int reporting
+  // We mirror INTA and INTB, so that only one line is required between MCP and Odroid for int reporting
   // The INTA/B will not be Floating 
   // INTs will be signaled with a LOW
   mcp_setupInterrupts(true,false,LOW);
@@ -42,7 +42,6 @@ void setup(){
 }
 
 void handleInterrupt(){
-  
   // Get more information from the MCP from the INT
   uint8_t pin=mcp_getLastInterruptPin();
   uint8_t val=mcp_getLastInterruptPinValue();
@@ -77,7 +76,8 @@ int main()
     }
 
     while(1) {
-       usleep(1000);
+       printf("Waiting for button pushes...\n");
+       sleep(1);
     }
 
     return 0;
